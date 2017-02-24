@@ -31,6 +31,9 @@
 			"glm_dishwasher" => "DR_DISHWASHER", 
 			"glm_washer" => "DR_WASHER", 
 			"glm_dryer" => "DR_DRYER",
+			"gas_heating" => "GAS_HEATING",
+			"gas_waterheater" => "GAS_WATERHEATER",
+			"gas_dryer" => "GAS_DRYER",
 			"mysql" => "MYSQL_ENABLE", 
 			"my_name" => "MYSQL_NAME", 
 			"my_scada" => "MYSQL_SCADA", 
@@ -221,6 +224,8 @@
 	<OPTION VALUE="direct" <?php if($glm_hvac=="direct") echo "SELECTED";?>>Direct</OPTION>
 	<OPTION VALUE="price" <?php if($glm_hvac=="price") echo "SELECTED";?>>Price</OPTION>
 	<OPTION VALUE="frequency" <?php if($glm_hvac=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+	</SELECT>
+	<INPUT TYPE="checkbox" NAME="gas_heating" <?php if ($gas_heating){echo"CHECKED";}?> /> Gas heat
 </TD><TD>HVAC demand response.</TD></TR>
 <TR><TH>&nbsp;&nbsp;Waterheater response</TH><TD><SELECT NAME="glm_waterheater">
 	<OPTION>(select one)</OPTION>
@@ -228,13 +233,16 @@
 	<OPTION VALUE="direct" <?php if($glm_waterheater=="direct") echo "SELECTED";?>>Direct</OPTION>
 	<OPTION VALUE="price" <?php if($glm_waterheater=="price") echo "SELECTED";?>>Price</OPTION>
 	<OPTION VALUE="frequency" <?php if($glm_waterheater=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+	</SELECT>
+	<INPUT TYPE="checkbox" NAME="gas_waterheater" <?php if ($gas_waterheater){echo"CHECKED";}?>/> Gas heat
 </TD><TD>Waterheater demand response type.</TD></TR>
 <TR><TH>&nbsp;&nbsp;Dishwasher response</TH><TD><SELECT NAME="glm_dishwasher">
 	<OPTION>(select one)</OPTION>
-<OPTION VALUE="none" <?php if($glm_dishwasher=="none") echo "SELECTED";?>>None</OPTION>
+	<OPTION VALUE="none" <?php if($glm_dishwasher=="none") echo "SELECTED";?>>None</OPTION>
 	<OPTION VALUE="direct" <?php if($glm_dishwasher=="direct") echo "SELECTED"?>>Direct</OPTION>
 	<OPTION VALUE="price" <?php if($glm_dishwasher=="price") echo "SELECTED";?>>Price</OPTION>
 	<OPTION VALUE="frequency" <?php if($glm_dishwasher=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+	</SELECT>
 </TD><TD>Dishwasher demand response type.</TD></TR>
 <TR><TH>&nbsp;&nbsp;Washer response</TH><TD><SELECT NAME="glm_washer">
 	<OPTION>(select one)</OPTION>
@@ -242,6 +250,7 @@
 	<OPTION VALUE="direct" <?php if($glm_washer=="direct") echo "SELECTED";?>>Direct</OPTION>
 	<OPTION VALUE="price" <?php if($glm_washer=="price") echo "SELECTED";?>>Price</OPTION>
 	<OPTION VALUE="frequency" <?php if($glm_washer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+	</SELECT>
 </TD><TD>Washer demand response type.</TD></TR>
 <TR><TH>&nbsp;&nbsp;Dryer response</TH><TD><SELECT NAME="glm_dryer">
 	<OPTION>(select one)</OPTION>
@@ -249,6 +258,8 @@
 	<OPTION VALUE="direct" <?php if($glm_dryer=="direct") echo "SELECTED";?>>Direct</OPTION>
 	<OPTION VALUE="price" <?php if($glm_dryer=="price") echo "SELECTED";?>>Price</OPTION>
 	<OPTION VALUE="frequency" <?php if($glm_dryer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+	</SELECT>
+	<INPUT TYPE="checkbox" NAME="gas_dryer" <?php if ($gas_dryer){echo"CHECKED";}?>/> Gas heat
 </TD><TD>Dryer demand response type.</TD></TR>
 
 <TR><TD COLSPAN=3><HR/></TD</TR>

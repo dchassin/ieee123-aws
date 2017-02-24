@@ -63,11 +63,11 @@ clock {
 // WEATHER
 //
 ///////////////////////////////////////////////////////
-#ifexist ${WEATHER}
+#ifexist data/${WEATHER}
 module climate;
 object climate {
         name weather;
-        tmyfile "${WEATHER}";
+        tmyfile "data/${WEATHER}";
         interpolate QUADRATIC;
 }
 #else

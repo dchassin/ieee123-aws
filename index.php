@@ -45,7 +45,8 @@
 		$now = date(DATE_RFC2822);
 		fwrite($fh,"<?php // do not edit -- updated automatically by 'save' action to setup.php at $now \n");
 		foreach ( $_POST as $key => $value )
-		{	if ( array_key_exists($key,$map) )
+		{	
+			if ( array_key_exists($key,$map) )
 			{
 				fwrite($fh,"\t$$key='$value';\n");
 			}
@@ -64,10 +65,6 @@
 			}
 		}
 		fclose($fh);
-	}
-	else if ( $_POST['action'] == 'More' )
-	{
-		error("More weather data is not available yet");
 	}
 	else if ( $_POST['action'] == 'Restart' )
 	{
@@ -141,123 +138,134 @@
 	if ($rtm>0) 
 		echo 'Running'; 
 	else 
-		echo '<FONT COLOR=RED>Stopped</FONT> (<A HREF="/output/gridlabd.log" TARGET=new>view output</A>)';
+		echo '<FONT COLOR=RED>Stopped</FONT> [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
 ?> 
 <INPUT TYPE="submit" NAME="action" VALUE="Restart"/></TD></TR>
 <TR><TD COLSPAN=3><HR/></TD</TR>
 <TR><TH COLSPAN=3><H2>Simulation Location</H2></TH></TR>
-<TR><TH>Weather</TH><TD><SELECT NAME="glm_weather">
-<?php
-	$files = scandir($gridlabd_share);
-	print('<OPTION VALUE="none">(select one)</OPTION>');
-	foreach ( $files as $pathname ) 
-	{
-		$path = pathinfo($pathname);
-		$name = $path['basename'];
-		$ext = $path['extension'];
-		if ( $ext == "tmy2" || $ext == "tmy3" )
+<TR><TH>Weather</TH><TD>
+	<SELECT NAME="glm_weather">
+	<?php
+		$files = scandir("data");
+		print('<OPTION VALUE="none">(select one)</OPTION>');
+		foreach ( $files as $pathname ) 
 		{
-			print("<OPTION VALUE=\"$name\"");
-			if ( $name == $glm_weather )
+			$path = pathinfo($pathname);
+			$name = $path['basename'];
+			$ext = $path['extension'];
+			if ( $ext == "tmy2" || $ext == "tmy3" )
 			{
-				print(" SELECTED");
+				print("<OPTION VALUE=\"$name\"");
+				if ( $name == $glm_weather )
+				{
+					print(" SELECTED");
+				}
+				print(">$name</OPTION>\n");
 			}
-			print(">$name</OPTION>\n");
 		}
-	}
-?>
-</SELECT> <INPUT TYPE="submit" NAME="action" VALUE="More"/><TD>The weather file for the simulation model.</TD></TR>
-<TR><TH>Timezone</TH><TD><SELECT NAME="glm_timezone">
-<?php
-	print("<OPTION>(select one)</OPTION>");
-	$fh = fopen("$gridlabd_share/tzinfo.txt","r");
-	while ( !feof($fh) )
-	{
-		$line = fgets($fh,256);
-		if ( substr($line,0,4)==" US/" )
+	?>
+	</SELECT> 
+	<BUTTON ONCLICK="window.showModalDialog('more.php','','width=650,height=350');">More</BUTTON>
+</TD><TD>The weather file for the simulation model.</TD></TR>
+<TR><TH>Timezone</TH><TD>
+	<SELECT NAME="glm_timezone">
+	<?php
+		print("<OPTION>(select one)</OPTION>");
+		$fh = fopen("$gridlabd_share/tzinfo.txt","r");
+		while ( !feof($fh) )
 		{
-			$locale = trim($line);
-			print("<OPTION VALUE=\"$locale\"");
-			if ( $locale == $glm_timezone ) 
+			$line = fgets($fh,256);
+			if ( substr($line,0,4)==" US/" )
 			{
-				print(" SELECTED");
+				$locale = trim($line);
+				print("<OPTION VALUE=\"$locale\"");
+				if ( $locale == $glm_timezone ) 
+				{
+					print(" SELECTED");
+				}
+				print(">$locale</OPTION>");
 			}
-			print(">$locale</OPTION>");
 		}
-	}
-	fclose($fh);
-	//system("/usr/bin/grep '[A-Z][A-Z]/' /usr/local/share/gridlabd/tzinfo.txt | sed -e 's/^ /<OPTION>/;s/$/<\/OPTION>/'");
-?>
-</SELECT></TD><TD>The timezone in which the simulation model runs.</TD></TR>
+		fclose($fh);
+	?>
+	</SELECT>
+</TD><TD>The timezone in which the simulation model runs.</TD></TR>
 
 <TR><TD COLSPAN=3><HR/></TD</TR>
 <TR><TH COLSPAN=3><H2>Model setup</H2></TH></TR>
-<TR><TH>Model name</TH><TD><SELECT NAME="glm_modelname">
-<?php
-	$files = scandir($www_modelpath);
-	print('<OPTION VALUE="none">(select one)</OPTION>');
-	foreach ( $files as $pathname ) 
-	{
-		$path = pathinfo($pathname);
-		$name = $path['basename'];
-		$ext = $path['extension'];
-		print("<OPTION VALUE=\"$name\"");
-		if ( $ext == "glm" )
+<TR><TH>Model name</TH><TD>
+	<SELECT NAME="glm_modelname">
+	<?php
+		$files = scandir($www_modelpath);
+		print('<OPTION VALUE="none">(select one)</OPTION>');
+		foreach ( $files as $pathname ) 
 		{
-			if ( $name == $glm_modelname )
+			$path = pathinfo($pathname);
+			$name = $path['basename'];
+			$ext = $path['extension'];
+			print("<OPTION VALUE=\"$name\"");
+			if ( $ext == "glm" )
 			{
-				print(" SELECTED");
+				if ( $name == $glm_modelname )
+				{
+					print(" SELECTED");
+				}
+				print(">$name</OPTION>\n");
 			}
-			print(">$name</OPTION>\n");
 		}
-	}
-?>
+	?>
+	</SELECT>
 </TD><TD>The simulation model to use when starting the server.</TD></TR>
 <TR><TH>Dynamic loads</TH><TD><INPUT TYPE="checkbox" NAME="glm_loads" <?php if($glm_loads){echo" CHECKED";}?>/></TD><TD>Enable dynamic residential loads.</TD></TR>
 <TR><TH>Solar</TH><TD><INPUT TYPE="checkbox" NAME="glm_solar" <?php if($glm_solar){echo" CHECKED";}?>/></TD><TD>Enable residential rooftop solar panels.</TD></TR>
 <TR><TH>Storage</TH><TD><INPUT TYPE="checkbox" NAME="glm_storage" <?php if($glm_storage){echo" CHECKED";}?>/></TD><TD>Enable residential battery storage.</TD></TR>
 <TR><TH>Demand response</TH><TD><INPUT TYPE="checkbox" NAME="glm_demand" <?php if($glm_demand){echo" CHECKED";}?>/></TD><TD>Enable residential demand response.</TD></TR>
 <!-- TODO: disable suboptions when demand response is disabled -->
-<TR><TH>&nbsp;&nbsp;HVAC response</TH><TD><SELECT NAME="glm_hvac">
-	<OPTION>(select one)</OPTION>
-	<OPTION VALUE="none" <?php if($glm_hvac=="none") echo "SELECTED";?>>None</OPTION>
-	<OPTION VALUE="direct" <?php if($glm_hvac=="direct") echo "SELECTED";?>>Direct</OPTION>
-	<OPTION VALUE="price" <?php if($glm_hvac=="price") echo "SELECTED";?>>Price</OPTION>
-	<OPTION VALUE="frequency" <?php if($glm_hvac=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+<TR><TH>&nbsp;&nbsp;HVAC response</TH><TD>
+	<SELECT NAME="glm_hvac">
+		<OPTION>(select one)</OPTION>
+		<OPTION VALUE="none" <?php if($glm_hvac=="none") echo "SELECTED";?>>None</OPTION>
+		<OPTION VALUE="direct" <?php if($glm_hvac=="direct") echo "SELECTED";?>>Direct</OPTION>
+		<OPTION VALUE="price" <?php if($glm_hvac=="price") echo "SELECTED";?>>Price</OPTION>
+		<OPTION VALUE="frequency" <?php if($glm_hvac=="frequency") echo "SELECTED";?>>Frequency</OPTION>
 	</SELECT>
 	<INPUT TYPE="checkbox" NAME="gas_heating" <?php if ($gas_heating){echo"CHECKED";}?> /> Gas heat
 </TD><TD>HVAC demand response.</TD></TR>
-<TR><TH>&nbsp;&nbsp;Waterheater response</TH><TD><SELECT NAME="glm_waterheater">
-	<OPTION>(select one)</OPTION>
-	<OPTION VALUE="none" <?php if($glm_waterheater=="none") echo "SELECTED";?>>None</OPTION>
-	<OPTION VALUE="direct" <?php if($glm_waterheater=="direct") echo "SELECTED";?>>Direct</OPTION>
-	<OPTION VALUE="price" <?php if($glm_waterheater=="price") echo "SELECTED";?>>Price</OPTION>
-	<OPTION VALUE="frequency" <?php if($glm_waterheater=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+<TR><TH>&nbsp;&nbsp;Waterheater response</TH><TD>
+	<SELECT NAME="glm_waterheater">
+		<OPTION>(select one)</OPTION>
+		<OPTION VALUE="none" <?php if($glm_waterheater=="none") echo "SELECTED";?>>None</OPTION>
+		<OPTION VALUE="direct" <?php if($glm_waterheater=="direct") echo "SELECTED";?>>Direct</OPTION>
+		<OPTION VALUE="price" <?php if($glm_waterheater=="price") echo "SELECTED";?>>Price</OPTION>
+		<OPTION VALUE="frequency" <?php if($glm_waterheater=="frequency") echo "SELECTED";?>>Frequency</OPTION>
 	</SELECT>
 	<INPUT TYPE="checkbox" NAME="gas_waterheater" <?php if ($gas_waterheater){echo"CHECKED";}?>/> Gas heat
 </TD><TD>Waterheater demand response type.</TD></TR>
-<TR><TH>&nbsp;&nbsp;Dishwasher response</TH><TD><SELECT NAME="glm_dishwasher">
-	<OPTION>(select one)</OPTION>
-	<OPTION VALUE="none" <?php if($glm_dishwasher=="none") echo "SELECTED";?>>None</OPTION>
-	<OPTION VALUE="direct" <?php if($glm_dishwasher=="direct") echo "SELECTED"?>>Direct</OPTION>
-	<OPTION VALUE="price" <?php if($glm_dishwasher=="price") echo "SELECTED";?>>Price</OPTION>
-	<OPTION VALUE="frequency" <?php if($glm_dishwasher=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+<TR><TH>&nbsp;&nbsp;Dishwasher response</TH><TD>
+	<SELECT NAME="glm_dishwasher">
+		<OPTION>(select one)</OPTION>
+		<OPTION VALUE="none" <?php if($glm_dishwasher=="none") echo "SELECTED";?>>None</OPTION>
+		<OPTION VALUE="direct" <?php if($glm_dishwasher=="direct") echo "SELECTED"?>>Direct</OPTION>
+		<OPTION VALUE="price" <?php if($glm_dishwasher=="price") echo "SELECTED";?>>Price</OPTION>
+		<OPTION VALUE="frequency" <?php if($glm_dishwasher=="frequency") echo "SELECTED";?>>Frequency</OPTION>
 	</SELECT>
 </TD><TD>Dishwasher demand response type.</TD></TR>
-<TR><TH>&nbsp;&nbsp;Washer response</TH><TD><SELECT NAME="glm_washer">
-	<OPTION>(select one)</OPTION>
-	<OPTION VALUE="none" <?php if($glm_washer=="none") echo "SELECTED";?>>None</OPTION>
-	<OPTION VALUE="direct" <?php if($glm_washer=="direct") echo "SELECTED";?>>Direct</OPTION>
-	<OPTION VALUE="price" <?php if($glm_washer=="price") echo "SELECTED";?>>Price</OPTION>
-	<OPTION VALUE="frequency" <?php if($glm_washer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+<TR><TH>&nbsp;&nbsp;Washer response</TH><TD>
+	<SELECT NAME="glm_washer">
+		<OPTION>(select one)</OPTION>
+		<OPTION VALUE="none" <?php if($glm_washer=="none") echo "SELECTED";?>>None</OPTION>
+		<OPTION VALUE="direct" <?php if($glm_washer=="direct") echo "SELECTED";?>>Direct</OPTION>
+		<OPTION VALUE="price" <?php if($glm_washer=="price") echo "SELECTED";?>>Price</OPTION>
+		<OPTION VALUE="frequency" <?php if($glm_washer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
 	</SELECT>
 </TD><TD>Washer demand response type.</TD></TR>
-<TR><TH>&nbsp;&nbsp;Dryer response</TH><TD><SELECT NAME="glm_dryer">
-	<OPTION>(select one)</OPTION>
-	<OPTION VALUE="none" <?php if($glm_dryer=="none") echo "SELECTED";?>>None</OPTION>
-	<OPTION VALUE="direct" <?php if($glm_dryer=="direct") echo "SELECTED";?>>Direct</OPTION>
-	<OPTION VALUE="price" <?php if($glm_dryer=="price") echo "SELECTED";?>>Price</OPTION>
-	<OPTION VALUE="frequency" <?php if($glm_dryer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
+<TR><TH>&nbsp;&nbsp;Dryer response</TH><TD>
+	<SELECT NAME="glm_dryer">
+		<OPTION>(select one)</OPTION>
+		<OPTION VALUE="none" <?php if($glm_dryer=="none") echo "SELECTED";?>>None</OPTION>
+		<OPTION VALUE="direct" <?php if($glm_dryer=="direct") echo "SELECTED";?>>Direct</OPTION>
+		<OPTION VALUE="price" <?php if($glm_dryer=="price") echo "SELECTED";?>>Price</OPTION>
+		<OPTION VALUE="frequency" <?php if($glm_dryer=="frequency") echo "SELECTED";?>>Frequency</OPTION>
 	</SELECT>
 	<INPUT TYPE="checkbox" NAME="gas_dryer" <?php if ($gas_dryer){echo"CHECKED";}?>/> Gas heat
 </TD><TD>Dryer demand response type.</TD></TR>

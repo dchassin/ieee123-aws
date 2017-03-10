@@ -121,7 +121,18 @@ object triplex_meter:..${COUNT} {
 #endif // PVPROB
 			generator_mode SUPPLY_DRIVEN;
 			panel_type SINGLE_CRYSTAL_SILICON;
-		 };
+		};
+#ifdef MYSQL_ENABLE
+#ifdef MYSQL_AMI
+		object recorder {
+			connection ami;
+			table solar;
+			property "VA_Out";
+			interval 60;
+			header_fieldnames "name";
+		};
+#endif // MYSQL_AMI
+#endif // MYSQL_ENABLE
 	};
 #endif // SOLAR
 }

@@ -56,63 +56,70 @@
 		<INPUT TYPE="submit" VALUE="On" ONCLICK="GLDSetGlobal('warn',1); refresh();" />
 	</TD></TR>
 	<TR><TD VALIGN=TOP>Output message context</TD><TD COLSPAN=2 WIDTH="85%">
-		<INPUT TYPE="checkbox" ID="context_NONE" ONCLICK="set_context('NONE'); refresh(); " />NONE
-		<INPUT TYPE="checkbox" ID="context_ALL" ONCLICK="set_context('ALL'); refresh(); " />ALL
-		<INPUT TYPE="checkbox" ID="context_LOAD" ONCLICK="set_context('LOAD'); refresh(); " />LOAD
-		<INPUT TYPE="checkbox" ID="context_CREATE" ONCLICK="set_context('CREATE'); refresh(); " />CREATE
-		<INPUT TYPE="checkbox" ID="context_EXEC" ONCLICK="set_context('EXEC'); refresh(); " />EXEC
-		<INPUT TYPE="checkbox" ID="context_TIME" ONCLICK="set_context('TIME'); refresh(); " />TIME
-		<INPUT TYPE="checkbox" ID="context_FIND" ONCLICK="set_context('FIND'); refresh(); " />FIND
-		<INPUT TYPE="checkbox" ID="context_CLASS" ONCLICK="set_context('CLASS'); refresh(); " />CLASS
-		<INPUT TYPE="checkbox" ID="context_OBJECT" ONCLICK="set_context('OBJECT'); refresh(); " />OBJECT
-		<INPUT TYPE="checkbox" ID="context_MODULE" ONCLICK="set_context('MODULE'); refresh(); " />MODULE
-		<INPUT TYPE="checkbox" ID="context_INDEX" ONCLICK="set_context('INDEX'); refresh(); " />INDEX
-		<INPUT TYPE="checkbox" ID="context_GLOBALS" ONCLICK="set_context('GLOBALS'); refresh(); " />GLOBALS
-		<INPUT TYPE="checkbox" ID="context_EXCEPTION" ONCLICK="set_context('EXCEPTION'); refresh(); " />EXCEPTION
-		<INPUT TYPE="checkbox" ID="context_AGGREGATE" ONCLICK="set_context('AGGREGATE'); refresh(); " />AGGREGATE
-		<INPUT TYPE="checkbox" ID="context_COMPARE" ONCLICK="set_context('COMPARE'); refresh(); " />COMPARE
-		<INPUT TYPE="checkbox" ID="context_CONVERT" ONCLICK="set_context('CONVERT'); refresh(); " />CONVERT
-		<INPUT TYPE="checkbox" ID="context_DELTAMODE" ONCLICK="set_context('DELTAMODE'); refresh(); " />DELTAMODE
-		<INPUT TYPE="checkbox" ID="context_ENDUSE" ONCLICK="set_context('ENDUSE'); refresh(); " />ENDUSE
-		<INPUT TYPE="checkbox" ID="context_ENVIRONMENT" ONCLICK="set_context('ENVIRONMENT'); refresh(); " />ENVIRONMENT
-		<INPUT TYPE="checkbox" ID="context_GUI" ONCLICK="set_context('GUI'); refresh(); " />GUI
-		<INPUT TYPE="checkbox" ID="context_HTTPCLIENT" ONCLICK="set_context('HTTPCLIENT'); refresh(); " />HTTPCLIENT
-		<INPUT TYPE="checkbox" ID="context_INSTANCE" ONCLICK="set_context('INSTANCE'); refresh(); " />INSTANCE
-		<INPUT TYPE="checkbox" ID="context_INTERPOLATE" ONCLICK="set_context('INTERPOLATE'); refresh(); " />INTERPOLATE
-		<INPUT TYPE="checkbox" ID="context_JOB" ONCLICK="set_context('JOB'); refresh(); " />JOB
-		<INPUT TYPE="checkbox" ID="context_KML" ONCLICK="set_context('KML'); refresh(); " />KML
-		<INPUT TYPE="checkbox" ID="context_LEGAL" ONCLICK="set_context('LEGAL'); refresh(); " />LEGAL
-		<INPUT TYPE="checkbox" ID="context_LINK" ONCLICK="set_context('LINK'); refresh(); " />LINK
-		<INPUT TYPE="checkbox" ID="context_LIST" ONCLICK="set_context('LIST'); refresh(); " />LIST
-		<INPUT TYPE="checkbox" ID="context_XML" ONCLICK="set_context('XML'); refresh(); " />XML
-		<INPUT TYPE="checkbox" ID="context_LOADSHAPE" ONCLICK="set_context('LOADSHAPE'); refresh(); " />LOADSHAPE
-		<INPUT TYPE="checkbox" ID="context_LOCALE" ONCLICK="set_context('LOCALE'); refresh(); " />LOCALE
-		<INPUT TYPE="checkbox" ID="context_LOCK" ONCLICK="set_context('LOCK'); refresh(); " />LOCK
-		<INPUT TYPE="checkbox" ID="context_MATCH" ONCLICK="set_context('MATCH'); refresh(); " />MATCH
-		<INPUT TYPE="checkbox" ID="context_MATLAB" ONCLICK="set_context('MATLAB'); refresh(); " />MATLAB
-		<INPUT TYPE="checkbox" ID="context_PROPERTY" ONCLICK="set_context('PROPERTY'); refresh(); " />PROPERTY
-		<INPUT TYPE="checkbox" ID="context_RANDOM" ONCLICK="set_context('RANDOM'); refresh(); " />RANDOM
-		<INPUT TYPE="checkbox" ID="context_REALTIME" ONCLICK="set_context('REALTIME'); refresh(); " />REALTIME
-		<INPUT TYPE="checkbox" ID="context_SANITIZE" ONCLICK="set_context('SANITIZE'); refresh(); " />SANITIZE
-		<INPUT TYPE="checkbox" ID="context_SAVE" ONCLICK="set_context('SAVE'); refresh(); " />SAVE
-		<INPUT TYPE="checkbox" ID="context_SCHEDULE" ONCLICK="set_context('SCHEDULE'); refresh(); " />SCHEDULE
-		<INPUT TYPE="checkbox" ID="context_SERVER" ONCLICK="set_context('SERVER'); refresh(); " />SERVER
-		<INPUT TYPE="checkbox" ID="context_SETUP" ONCLICK="set_context('SETUP'); refresh(); " />SETUP
-		<INPUT TYPE="checkbox" ID="context_STREAM" ONCLICK="set_context('STREAM'); refresh(); " />STREAM
-		<INPUT TYPE="checkbox" ID="context_TEST" ONCLICK="set_context('TEST'); refresh(); " />TEST
-		<INPUT TYPE="checkbox" ID="context_THREADPOOL" ONCLICK="set_context('THREADPOOL'); refresh(); " />THREADPOOL
-		<INPUT TYPE="checkbox" ID="context_TRANSFORM" ONCLICK="set_context('TRANSFORM'); refresh(); " />TRANSFORM
-		<INPUT TYPE="checkbox" ID="context_HTTP" ONCLICK="set_context('HTTP'); refresh(); " />HTTP
-		<INPUT TYPE="checkbox" ID="context_UNIT" ONCLICK="set_context('UNIT'); refresh(); " />UNIT
-		<INPUT TYPE="checkbox" ID="context_VALIDATE" ONCLICK="set_context('VALIDATE'); refresh(); " />VALIDATE
-		<INPUT TYPE="checkbox" ID="context_VERSION" ONCLICK="set_context('VERSION'); refresh(); " />VERSION
-		<INPUT TYPE="checkbox" ID="context_XCORE" ONCLICK="set_context('XCORE'); refresh(); " />XCORE
-		<INPUT TYPE="checkbox" ID="context_MAIN" ONCLICK="set_context('MAIN'); refresh(); " />MAIN
-		<INPUT TYPE="checkbox" ID="context_CMDARG" ONCLICK="set_context('CMDARG'); refresh(); " />CMDARG
+		<TABLE><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_NONE" ONCLICK="set_context('NONE'); refresh(); " />NONE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_ALL" ONCLICK="set_context('ALL'); refresh(); " />ALL</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LOAD" ONCLICK="set_context('LOAD'); refresh(); " />LOAD</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_CREATE" ONCLICK="set_context('CREATE'); refresh(); " />CREATE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_EXEC" ONCLICK="set_context('EXEC'); refresh(); " />EXEC</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_TIME" ONCLICK="set_context('TIME'); refresh(); " />TIME</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_FIND" ONCLICK="set_context('FIND'); refresh(); " />FIND</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_CLASS" ONCLICK="set_context('CLASS'); refresh(); " />CLASS</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_OBJECT" ONCLICK="set_context('OBJECT'); refresh(); " />OBJECT</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_MODULE" ONCLICK="set_context('MODULE'); refresh(); " />MODULE</TD>
+		</TR><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_INDEX" ONCLICK="set_context('INDEX'); refresh(); " />INDEX</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_GLOBALS" ONCLICK="set_context('GLOBALS'); refresh(); " />GLOBALS</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_EXCEPTION" ONCLICK="set_context('EXCEPTION'); refresh(); " />EXCEPTION</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_AGGREGATE" ONCLICK="set_context('AGGREGATE'); refresh(); " />AGGREGATE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_COMPARE" ONCLICK="set_context('COMPARE'); refresh(); " />COMPARE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_CONVERT" ONCLICK="set_context('CONVERT'); refresh(); " />CONVERT</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_DELTAMODE" ONCLICK="set_context('DELTAMODE'); refresh(); " />DELTAMODE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_ENDUSE" ONCLICK="set_context('ENDUSE'); refresh(); " />ENDUSE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_ENVIRONMENT" ONCLICK="set_context('ENVIRONMENT'); refresh(); " />ENVIRONMENT</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_GUI" ONCLICK="set_context('GUI'); refresh(); " />GUI</TD>
+		</TR><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_HTTPCLIENT" ONCLICK="set_context('HTTPCLIENT'); refresh(); " />HTTPCLIENT</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_INSTANCE" ONCLICK="set_context('INSTANCE'); refresh(); " />INSTANCE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_INTERPOLATE" ONCLICK="set_context('INTERPOLATE'); refresh(); " />INTERPOLATE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_JOB" ONCLICK="set_context('JOB'); refresh(); " />JOB</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_KML" ONCLICK="set_context('KML'); refresh(); " />KML</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LEGAL" ONCLICK="set_context('LEGAL'); refresh(); " />LEGAL</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LINK" ONCLICK="set_context('LINK'); refresh(); " />LINK</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LIST" ONCLICK="set_context('LIST'); refresh(); " />LIST</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_XML" ONCLICK="set_context('XML'); refresh(); " />XML</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LOADSHAPE" ONCLICK="set_context('LOADSHAPE'); refresh(); " />LOADSHAPE</TD>
+		</TR><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_LOCALE" ONCLICK="set_context('LOCALE'); refresh(); " />LOCALE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_LOCK" ONCLICK="set_context('LOCK'); refresh(); " />LOCK</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_MATCH" ONCLICK="set_context('MATCH'); refresh(); " />MATCH</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_MATLAB" ONCLICK="set_context('MATLAB'); refresh(); " />MATLAB</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_PROPERTY" ONCLICK="set_context('PROPERTY'); refresh(); " />PROPERTY</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_RANDOM" ONCLICK="set_context('RANDOM'); refresh(); " />RANDOM</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_REALTIME" ONCLICK="set_context('REALTIME'); refresh(); " />REALTIME</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_SANITIZE" ONCLICK="set_context('SANITIZE'); refresh(); " />SANITIZE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_SAVE" ONCLICK="set_context('SAVE'); refresh(); " />SAVE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_SCHEDULE" ONCLICK="set_context('SCHEDULE'); refresh(); " />SCHEDULE</TD>
+		</TR><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_SERVER" ONCLICK="set_context('SERVER'); refresh(); " />SERVER</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_SETUP" ONCLICK="set_context('SETUP'); refresh(); " />SETUP</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_STREAM" ONCLICK="set_context('STREAM'); refresh(); " />STREAM</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_TEST" ONCLICK="set_context('TEST'); refresh(); " />TEST</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_THREADPOOL" ONCLICK="set_context('THREADPOOL'); refresh(); " />THREADPOOL</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_TRANSFORM" ONCLICK="set_context('TRANSFORM'); refresh(); " />TRANSFORM</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_HTTP" ONCLICK="set_context('HTTP'); refresh(); " />HTTP</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_UNIT" ONCLICK="set_context('UNIT'); refresh(); " />UNIT</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_VALIDATE" ONCLICK="set_context('VALIDATE'); refresh(); " />VALIDATE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_VERSION" ONCLICK="set_context('VERSION'); refresh(); " />VERSION</TD>
+		</TR><TR>
+		<TD><INPUT TYPE="checkbox" ID="context_XCORE" ONCLICK="set_context('XCORE'); refresh(); " />XCORE</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_MAIN" ONCLICK="set_context('MAIN'); refresh(); " />MAIN</TD>
+		<TD><INPUT TYPE="checkbox" ID="context_CMDARG" ONCLICK="set_context('CMDARG'); refresh(); " />CMDARG</TD>
+		</TR></TABLE>
 	</TD></TR>
 	<TR><TD VALIGN="top">Output
-		<INPUT TYPE="submit" VALUE="Refresh" ONCLICK="logrefresh(true);" />
-	</TD><TD COLSPAN=2><DIV BORDER=1 ID="output">...</DIV></TD></TR>
+		<INPUT TYPE="submit" VALUE="Refresh" ONCLICK="logrefresh(true);" /><DIV ID="pos">...</DIV>
+	</TD><TD COLSPAN=2><TEXTAREA ID="log" BORDER=1 COLS=160 ROWS=20></TEXTAREA></TD></TR>
 </TABLE>
 <HR/>
 <TABLE WIDTH="100%">
@@ -164,9 +171,19 @@
 	        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	    }
 	    xmlhttp.open("GET","http://<<<HOSTNAME>>>:<<<PORT>>>/rt/output/gridlabd.log", false);
-	    xmlhttp.send();  
-	    document.getElementById("output").innerHTML = "<TEXTAREA ID=log COLS=160 ROWS=20>" + xmlhttp.responseText + "</TEXTAREA>";
-	    document.getElementById("log").scrollTop = document.getElementById("log").scrollHeight;
+	    xmlhttp.send();
+	    if ( xmlhttp.responseText != document.getElementById("log").innerHTML )
+	    {
+	    	log = document.getElementById("log");
+			lastpos = log.scrollTop;
+			if ( log.scrollHeight - log.scrollTop === log.clientHeight )
+				lastpos = null;
+		    log.innerHTML = xmlhttp.responseText;
+		    if ( lastpos == null )
+			    log.scrollTop = log.scrollHeight;
+			else
+			    log.scrollTop = lastpos;
+		}
 	}
 </SCRIPT>
 

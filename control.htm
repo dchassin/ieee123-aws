@@ -117,8 +117,9 @@
 		<TD><INPUT TYPE="checkbox" ID="context_CMDARG" ONCLICK="set_context('CMDARG'); refresh(); " />CMDARG</TD>
 		</TR></TABLE>
 	</TD></TR>
-	<TR><TD VALIGN="top">Output
-		<INPUT TYPE="submit" VALUE="Refresh" ONCLICK="logrefresh(true);" />
+	<TR><TD VALIGN="top">Log output
+		<INPUT TYPE="submit" VALUE="Clear" ONCLICK="logclear();" />
+		<INPUT TYPE="submit" VALUE="Show all" ONCLICK="showall();" />
 	</TD><TD COLSPAN=2><TEXTAREA ID="log" BORDER=1 COLS=160 ROWS=20></TEXTAREA></TD></TR>
 </TABLE>
 <HR/>
@@ -159,6 +160,18 @@
 		document.getElementById("context_"+GLDSetGlobal("output_message_context",name)).checked = 0;
 		document.getElementById("context_"+name).checked = 1;
 	}
+	var offset = 0;
+	function logclear()
+	{
+    	log = document.getElementById("log");
+		offset += log.textLength;
+		log.innerHTML = "";
+	}
+	function showall()
+	{
+		offset = 0;
+		logrefresh(true);
+	}
 	function logrefresh(onetime)
 	{
 		if ( !onetime ) setTimeout("logrefresh(false)",1000);
@@ -170,7 +183,7 @@
 	    {// code for IE6, IE5
 	        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	    }
-	    xmlhttp.open("GET","http://<<<HOSTNAME>>>:<<<PORT>>>/rt/output/gridlabd.log", false);
+	    xmlhttp.open("GET","http://<<<HOSTNAME>>>:<<<PORT>>>/rt/output/gridlabd.log:"+offset, false);
 	    xmlhttp.send();
 	    if ( xmlhttp.responseText != document.getElementById("log").innerHTML )
 	    {

@@ -89,7 +89,7 @@
 		$ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ;
 		curl_setopt($ch,CURLOPT_TIMEOUT,1);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
+		//curl_setopt($ch, CURLOPT_HEADER, 0);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		return $result;
@@ -136,10 +136,12 @@
 <TR><TH>Status</TH><TD COLSPAN=2>
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 
-	if ($rtm>=0) 
+	if ($rtm>0) 
 		echo 'Running'; 
-	else 
-		echo '<FONT COLOR=RED>Stopped</FONT> [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
+	else if ($rtm==0)
+		echo 'Starting';
+	else
+		echo '<FONT COLOR=RED>Error ('+$rtm+')</FONT> [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
 ?> 
 <INPUT TYPE="submit" NAME="action" VALUE="Restart"/></TD></TR>
 <TR><TD COLSPAN=3><HR/></TD</TR>

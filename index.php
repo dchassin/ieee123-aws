@@ -136,7 +136,7 @@
 <TR><TH>Status</TH><TD COLSPAN=2>
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 
-	if ($rtm>0) 
+	if ($rtm>=0) 
 		echo 'Running'; 
 	else 
 		echo '<FONT COLOR=RED>Stopped</FONT> [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';

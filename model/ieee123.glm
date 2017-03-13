@@ -216,8 +216,8 @@ export mysql ${MYSQL_NAME}_model;
 //
 ///////////////////////////////////////////////////////
 #ifndef STARTTIME
-#print starting simulation at ${TODAY}
+#print starting realtime simulation at ${TODAY}
 #else
-#print Starting historical from ${STARTTIME} to ${STOPTIME}
+#print starting historical simulation from ${STARTTIME} to ${STOPTIME}
 #set show_progress=1
 #endif

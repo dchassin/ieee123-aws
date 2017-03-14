@@ -73,7 +73,7 @@
 		passthru("$gridlabd_bin/gridlabd $www_modelpath/$glm_modelname 1>output/gridlabd.log 2>&1 &");
 		sleep(2);
 	}
-	else if ( $_POST['action'] == 'Cancel' || $_POST['action'] == 'Reset' )
+	else if ( $_POST['action'] == 'Cancel' || $_POST['action'] == 'Reset' || $_POST['action'] == 'Refresh' )
 	{
 	}
 	else if ( $_POST['action'] != '' )
@@ -89,7 +89,7 @@
 		$ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ;
 		curl_setopt($ch,CURLOPT_TIMEOUT,1);
-		//curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
 		$result = curl_exec($ch);
 		curl_close($ch);
 		return $result;
@@ -112,6 +112,14 @@
 </STYLE>
 <TITLE>GridLAB-D&trade; Realtime Simulation</TITLE>
 </HEAD>
+<SCRIPT type="text/javascript">
+	function refresh(timeout)
+	{
+	    if ( timeout > 0 ) setTimeout("refresh()",timeout);
+	    // TODO
+	}
+	refresh(1000);
+</SCRIPT>
 <BODY>
 <H1>
 [Home]
@@ -127,23 +135,26 @@
 <TABLE CELLSPACING=5>
 <TR><TD COLSPAN=3><HR/></TD</TR>
 <TR><TH COLSPAN=3><H2>Server Setup</H2></TH></TR>
-<TR><TH>Hostname</TH><TD COLSPAN=2><A HREF="http://<?php echo $gridlabd_server;?>/">http://<?php echo $gridlabd_server;?>/</A></TD></TR>
+<TR><TH>Hostname</TH><TD>http://<INPUT TYPE="text" NAME="gridlabd_server" VALUE="<?php echo $gridlabd_server;?>" />/</TD><TD>The server hostname to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Port</TH><TD><INPUT TYPE="text" NAME="gridlabd_port" VALUE="<?php echo $gridlabd_port;?>" /></TD><TD>The server TCP port to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Version</TH><TD COLSPAN=2><?php system("$gridlabd_bin/gridlabd --version || echo '<FONT COLOR=RED>(gridlabd error)</FONT>'");?></TD></TR>
-<TR><TH VALIGN=TOP>Job list</TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
+<TR><TH VALIGN=TOP>Job list <INPUT TYPE="submit" NAME="action" VALUE="Refresh" ONCLICK="location.reload(true);" /></TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
 ---- ----- ---------- ------- ----------------------- ---------------------------------------------------
-<?php system("$gridlabd_bin/gridlabd --plist || echo '<FONT COLOR=RED>Error</FONT>'");?></PRE></TD></TR>
-<TR><TH>Status</TH><TD COLSPAN=2>
+<DIV ID="joblist"><?php system("$gridlabd_bin/gridlabd --plist || echo '<FONT COLOR=RED>Error</FONT>'");?></DIV></PRE></TD></TR>
+<TR><TH>Status<INPUT TYPE="submit" NAME="action" VALUE="Restart"/> </TH>
+<TD COLSPAN=2><DIV ID="status">
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 
-	if ($rtm>0) 
-		echo 'Running'; 
-	else if ($rtm==0)
-		echo 'Starting';
+	if ( $rtm > 0.0 && $rtm <= 1.0) 
+		echo 'Realtime server is running'; 
+	else if ( $rtm == 0.0 || $rm == "" )
+		echo 'Realtime server startup in progress (<A HREF="">Refresh</A>)';
 	else
-		echo '<FONT COLOR=RED>Error ('+$rtm+')</FONT> [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
+		echo "<FONT COLOR=RED>Realtime server error: $rtm</FONT>"; 
+	if ( filesize('output/gridlabd.log')>0 )
+		echo ' [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
 ?> 
-<INPUT TYPE="submit" NAME="action" VALUE="Restart"/></TD></TR>
+</DIV></TD></TR>
 <TR><TD COLSPAN=3><HR/></TD</TR>
 <TR><TH COLSPAN=3><H2>Simulation Location</H2></TH></TR>
 <TR><TH>Weather</TH><TD>

@@ -117,18 +117,18 @@ object currdump {
 //
 // Powerflow component configurations
 //
-#include "model/library.glm"
+#include "model/library/library.glm"
 
 //
 // Power system topology
 //
-#include "model/feeder.glm"
-#include "model/lateral.glm"
+#include "model/library/feeder.glm"
+#include "model/library/lateral.glm"
 
 //
 // Power system geoinformation
 //
-#include "model/geolocation.glm"
+#include "model/library/geolocation.glm"
 
 ///////////////////////////////////////////////////////
 //
@@ -172,7 +172,7 @@ object database {
 // LOAD MODEL
 //
 ///////////////////////////////////////////////////////
-#include "model/loads.glm"
+#include "model/library/loads.glm"
 
 ///////////////////////////////////////////////////////
 //
@@ -185,7 +185,7 @@ object database {
 // SCADA recorders
 //
 #ifdef MYSQL_SCADA
-#include "model/scada.glm"
+#include "model/library/scada.glm"
 #endif // MYSQL_SCADA
 #endif // MYSQL_ENABLE
 
@@ -194,7 +194,7 @@ object database {
 // CONTROLS
 //
 ///////////////////////////////////////////////////////
-#include "model/control.glm"
+#include "model/library/control.glm"
 
 ///////////////////////////////////////////////////////
 //

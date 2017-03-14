@@ -217,9 +217,9 @@
 			$path = pathinfo($pathname);
 			$name = $path['basename'];
 			$ext = $path['extension'];
-			print("<OPTION VALUE=\"$name\"");
 			if ( $ext == "glm" )
 			{
+				print("<OPTION VALUE=\"$name\"");
 				if ( $name == $glm_modelname )
 				{
 					print(" SELECTED");

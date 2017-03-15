@@ -145,41 +145,53 @@
 <TD COLSPAN=2><DIV ID="status">
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 
-	if ( $rtm > 0.0 && $rtm <= 1.0) 
-		echo 'Realtime server is running'; 
-	else if ( $rtm == 0.0 || $rm == "" )
-		echo 'Realtime server startup in progress (<A HREF="">Refresh</A>)';
+	if ( file_exists('output') )
+	{
+		if ( $rtm > 0.0 && $rtm <= 1.0) 
+			echo 'Realtime server is running'; 
+		else if ( $rtm == 0.0 || $rm == "" )
+			echo 'Realtime server startup in progress (<A HREF="">Refresh</A>)';
+		else
+			echo "<FONT COLOR=RED>Realtime server error: $rtm</FONT>"; 
+		if ( filesize('output/gridlabd.log')>0 )
+			echo ' [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
+	}
 	else
-		echo "<FONT COLOR=RED>Realtime server error: $rtm</FONT>"; 
-	if ( filesize('output/gridlabd.log')>0 )
-		echo ' [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
+	{
+		echo '<FONT COLOR="red">Error: output folder is missing</FONT>';
+	}
 ?> 
 </DIV></TD></TR>
 <TR><TD COLSPAN=3><HR/></TD</TR>
 <TR><TH COLSPAN=3><H2>Simulation Location</H2></TH></TR>
 <TR><TH>Weather</TH><TD>
-	<SELECT NAME="glm_weather">
 	<?php
-		$files = scandir("data");
-		print('<OPTION VALUE="none">(select one)</OPTION>');
-		foreach ( $files as $pathname ) 
+		if ( file_exists("data") )
 		{
-			$path = pathinfo($pathname);
-			$name = $path['basename'];
-			$ext = $path['extension'];
-			if ( $ext == "tmy2" || $ext == "tmy3" )
+			$files = scandir("data");
+			echo '<SELECT NAME="glm_weather"><OPTION VALUE="none">(select one)</OPTION>';
+			foreach ( $files as $pathname ) 
 			{
-				print("<OPTION VALUE=\"$name\"");
-				if ( $name == $glm_weather )
+				$path = pathinfo($pathname);
+				$name = $path['basename'];
+				$ext = $path['extension'];
+				if ( $ext == "tmy2" || $ext == "tmy3" )
 				{
-					print(" SELECTED");
+					print("<OPTION VALUE=\"$name\"");
+					if ( $name == $glm_weather )
+					{
+						print(" SELECTED");
+					}
+					print(">$name</OPTION>\n");
 				}
-				print(">$name</OPTION>\n");
 			}
+			echo '</SELECT><BUTTON ONCLICK="window.showModalDialog(\'more.php\',\'\',\'width=650,height=350\');">More</BUTTON>';
 		}
+		else
+		{
+			echo '<FONT COLOR="red">Error: data folder is missing</FONT>';
+		}	
 	?>
-	</SELECT> 
-	<BUTTON ONCLICK="window.showModalDialog('more.php','','width=650,height=350');">More</BUTTON>
 </TD><TD>The weather file for the simulation model.</TD></TR>
 <TR><TH>Timezone</TH><TD>
 	<SELECT NAME="glm_timezone">

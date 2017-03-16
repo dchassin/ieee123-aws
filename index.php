@@ -71,10 +71,21 @@
 		wget("http://$gridlabd_server:$gridlabd_port/control/stop");
 		sleep(1);
 		passthru("$gridlabd_bin/gridlabd $www_modelpath/$glm_modelname 1>output/gridlabd.log 2>&1 &");
-		sleep(2);
+		sleep(1);
+	}
+	else if ( $_POST['action'] == 'Stop' )
+	{
+		wget("http://$gridlabd_server:$gridlabd_port/control/stop");
+		sleep(1);
+	}
+	else if ( $_POST['action'] == 'Start' )
+	{
+		passthru("$gridlabd_bin/gridlabd $www_modelpath/$glm_modelname 1>output/gridlabd.log 2>&1 &");
+		sleep(1);
 	}
 	else if ( $_POST['action'] == 'Cancel' || $_POST['action'] == 'Reset' || $_POST['action'] == 'Refresh' )
 	{
+		// no action
 	}
 	else if ( $_POST['action'] != '' )
 	{
@@ -91,6 +102,13 @@
 		curl_setopt($ch,CURLOPT_TIMEOUT,1);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		$result = curl_exec($ch);
+		$info = curl_getinfo($ch);
+		if ( $result === false || $info['http_code'] != 200 )
+		{
+			$code = $info['http_code'];
+			$error = curl_error($ch);
+			$result = "ERROR $code: $error";
+		}
 		curl_close($ch);
 		return $result;
 	}
@@ -101,6 +119,7 @@
 		color: black;
 		text-align: left;
 		font-weight: bold;
+		vertical-align: top;
 	}
 	TD {
 		color: blue;
@@ -138,27 +157,44 @@
 <TR><TH>Hostname</TH><TD>http://<INPUT TYPE="text" NAME="gridlabd_server" VALUE="<?php echo $gridlabd_server;?>" />/</TD><TD>The server hostname to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Port</TH><TD><INPUT TYPE="text" NAME="gridlabd_port" VALUE="<?php echo $gridlabd_port;?>" /></TD><TD>The server TCP port to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Version</TH><TD COLSPAN=2><?php system("$gridlabd_bin/gridlabd --version || echo '<FONT COLOR=RED>(gridlabd error)</FONT>'");?></TD></TR>
-<TR><TH VALIGN=TOP>Job list <INPUT TYPE="submit" NAME="action" VALUE="Refresh" ONCLICK="location.reload(true);" /></TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
+<TR><TH>Job list <INPUT TYPE="submit" NAME="action" VALUE="Refresh" ONCLICK="location.reload(true);" /></TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
 ---- ----- ---------- ------- ----------------------- ---------------------------------------------------
 <DIV ID="joblist"><?php system("$gridlabd_bin/gridlabd --plist || echo '<FONT COLOR=RED>Error</FONT>'");?></DIV></PRE></TD></TR>
-<TR><TH>Status<INPUT TYPE="submit" NAME="action" VALUE="Restart"/> </TH>
+<TR><TH>Status</TH>
 <TD COLSPAN=2><DIV ID="status">
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 
+	if ( ! file_exists('config/local.php') )
+	{
+		error("config/local.php is missing -- have you configured your server properly?");
+	}
+	if ( ! file_exists('config/local.glm') )
+	{
+		error("config/local.glm is missing -- have you configured your server properly?");
+	}
 	if ( file_exists('output') )
 	{
 		if ( $rtm > 0.0 && $rtm <= 1.0) 
-			echo 'Realtime server is running'; 
-		else if ( $rtm == 0.0 || $rm == "" )
-			echo 'Realtime server startup in progress (<A HREF="">Refresh</A>)';
+		{
+			echo 'Realtime server is running<BR/><INPUT TYPE="submit" NAME="action" VALUE="Stop"/> <INPUT TYPE="submit" NAME="action" VALUE="Restart"/>';
+		}
+		else if ( substr($rtm,0,5)!="ERROR" )
+		{
+			echo 'Realtime server startup in progress<BR/><INPUT TYPE="submit" NAME="action" VALUE="Refresh"/>';
+		}
 		else
-			echo "<FONT COLOR=RED>Realtime server error: $rtm</FONT>"; 
+		{
+			error("Server is not runningl HTTP error is as follows:<BR/>$rtm"); 
+			echo '<BR/><INPUT TYPE="submit" NAME="action" VALUE="Start"/>';
+		}
 		if ( filesize('output/gridlabd.log')>0 )
 			echo ' [<A HREF="/output/gridlabd.log" TARGET=_blank>View Log</A>]';
+		else
+			echo ' (nothing logged yet)';
 	}
 	else
 	{
-		echo '<FONT COLOR="red">Error: output folder is missing</FONT>';
+		error("output folder is missing -- have you configured your server properly?");
 	}
 ?> 
 </DIV></TD></TR>
@@ -189,7 +225,7 @@
 		}
 		else
 		{
-			echo '<FONT COLOR="red">Error: data folder is missing</FONT>';
+			error("data folder is missing -- have you configured your server properly");
 		}	
 	?>
 </TD><TD>The weather file for the simulation model.</TD></TR>

@@ -319,9 +319,9 @@ object transformer_configuration {
 // Regulator configs
 object regulator_configuration {
 	name rc501;
-	connect_type 1;
-	band_center 120.000;
-	band_width 2.0;
+	connect_type WYE_WYE;
+	band_center 2400.000;
+	band_width 40.0;
 	time_delay 30.0;
 	raise_taps 16;
 	lower_taps 16;
@@ -332,7 +332,7 @@ object regulator_configuration {
 	CT_phase "A";
 	PT_phase "A";
 	regulation 0.10;
-	Control MANUAL;
+	Control OUTPUT_VOLTAGE;
 	Type A;
 	tap_pos_A 0;
 	tap_pos_B 0;
@@ -341,9 +341,9 @@ object regulator_configuration {
 
 object regulator_configuration {
 	name rc502;
-	connect_type 1;
-	band_center 120.000;
-	band_width 2.0;
+	connect_type WYE_WYE;
+	band_center 2400.000;
+	band_width 40.0;
 	time_delay 30.0;
 	raise_taps 16;
 	lower_taps 16;
@@ -354,7 +354,7 @@ object regulator_configuration {
 	CT_phase "A";
 	PT_phase "A";
 	regulation 0.10;
-	Control MANUAL;
+	Control OUTPUT_VOLTAGE;
 	Type A;
 	tap_pos_A -1;
 	tap_pos_B 0;
@@ -363,9 +363,9 @@ object regulator_configuration {
 
 object regulator_configuration {
 	name rc503;
-	connect_type 1;
-	band_center 120.000;
-	band_width 1.0;
+	connect_type WYE_WYE;
+	band_center 2400.000;
+	band_width 20.0;
 	time_delay 30.0;
 	raise_taps 16;
 	lower_taps 16;
@@ -378,7 +378,7 @@ object regulator_configuration {
 	CT_phase "AC";
 	PT_phase "AC";
 	regulation 0.10;
-	Control MANUAL;
+	Control OUTPUT_VOLTAGE;
 	Type A;
 	tap_pos_A 0;
 	tap_pos_B 0;
@@ -387,9 +387,9 @@ object regulator_configuration {
 
 object regulator_configuration {
 	name rc504;
-	connect_type 1;
-	band_center 124.000;
-	band_width 2.0;
+	connect_type WYE_WYE;
+	band_center 2400.000;
+	band_width 40.0;
 	time_delay 30.0;
 	raise_taps 16;
 	lower_taps 16;
@@ -404,7 +404,7 @@ object regulator_configuration {
 	CT_phase "ABC";
 	PT_phase "ABC";
 	regulation 0.10;
-	Control MANUAL;
+	Control OUTPUT_VOLTAGE;
 	Type A;
 	tap_pos_A 8;
 	tap_pos_B 1;

@@ -66,6 +66,11 @@
 		}
 		fclose($fh);
 	}
+	else if ( $_POST['action'] == 'Stop' )
+	{
+		wget("http://$gridlabd_server:$gridlabd_port/control/stop");
+		sleep(1);
+	}
 	else if ( $_POST['action'] == 'Restart' )
 	{
 		wget("http://$gridlabd_server:$gridlabd_port/control/stop");
@@ -141,7 +146,10 @@
 <TR><TH VALIGN=TOP>Job list <INPUT TYPE="submit" NAME="action" VALUE="Refresh" ONCLICK="location.reload(true);" /></TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
 ---- ----- ---------- ------- ----------------------- ---------------------------------------------------
 <DIV ID="joblist"><?php system("$gridlabd_bin/gridlabd --plist || echo '<FONT COLOR=RED>Error</FONT>'");?></DIV></PRE></TD></TR>
-<TR><TH>Status<INPUT TYPE="submit" NAME="action" VALUE="Restart"/> </TH>
+<TR><TH>Status
+	<INPUT TYPE="submit" NAME="action" VALUE="Restart"/>
+	<INPUT TYPE="submit" NAME="action" VALUE="Stop"/>
+</TH>
 <TD COLSPAN=2><DIV ID="status">
 <?php 
 	$rtm=wget("http://$gridlabd_server:$gridlabd_port/raw/realtime_metric"); 

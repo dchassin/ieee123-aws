@@ -30,11 +30,14 @@
 	<TR><TD>City</TD><TD COLSPAN=2><DIV ID="city"></DIV></TD></TR>
 	<TR><TD>Temperature</TD><TD COLSPAN=2><DIV ID="temperature"></DIV></TD></TR>
 	<TR><TD>Humidity</TD><TD COLSPAN=2><DIV ID="humidity"></DIV></TD></TR>
-	<TR><TD>Clouds</TD><TD COLSPAN=2><DIV ID="opq_sky_cov"></DIV></TD></TR>
+	<TR><TD>Cloud cover</TD><TD COLSPAN=2><DIV ID="opq_sky_cov"></DIV></TD></TR>
+	<TR><TD>Cloud opacity</TD><TD COLSPAN=2><DIV ID="cloud_opacity"></DIV></TD></TR>
+	<TR><TD>Rainfall</TD><TD COLSPAN=2><DIV ID="rainfall"></DIV></TD></TR>
 	<TR><TD>Pressure</TD><TD COLSPAN=2><DIV ID="pressure"></DIV></TD></TR>
 	<TR><TD>Wind speed</TD><TD COLSPAN=2><DIV ID="wind_speed"></DIV></TD></TR>
 	<TR><TD>Wind heading</TD><TD COLSPAN=2><DIV ID="wind_dir"></DIV></TD></TR>
 	<TR><TD>Wind gust</TD><TD COLSPAN=2><DIV ID="wind_gust"></DIV></TD></TR>
+	<TR><TD>Solar global</TD><TD COLSPAN=2><DIV ID="solar_global"></DIV></TD></TR>
 </TABLE>
 <HR/>
 <TABLE WIDTH="100%">
@@ -58,10 +61,13 @@
 	    document.getElementById("temperature").innerHTML = GLDGetProperty("weather","temperature[degF,1f]");
 	    document.getElementById("humidity").innerHTML = GLDGetProperty("weather","humidity[%,0f]");	    
 	    document.getElementById("opq_sky_cov").innerHTML = GLDGetProperty("weather","opq_sky_cov[%,0f]");	    
+	    document.getElementById("cloud_opacity").innerHTML = GLDGetProperty("weather","cloud_opacity[%,0f]");	    
+	    document.getElementById("rainfall").innerHTML = GLDGetProperty("weather","rainfall[in/h,2f]");	    
 	    document.getElementById("pressure").innerHTML = GLDGetProperty("weather","pressure[inHg,2f]");	    
 	    document.getElementById("wind_speed").innerHTML = GLDGetProperty("weather","wind_speed[mph,0f]");	    
 	    document.getElementById("wind_dir").innerHTML = GLDGetProperty("weather","wind_dir[deg,0f]");	    
 	    document.getElementById("wind_gust").innerHTML = GLDGetProperty("weather","wind_gust[mph,0f]");	  
+	    document.getElementById("solar_global").innerHTML = GLDGetProperty("weather","solar_global[W/m^2,0f]");	  
 	    document.getElementById("status").innerHTML = "Ok";
 	    count = 0;
 	}

@@ -132,7 +132,35 @@
 	</TR>
 
 	<TR><TH COLSPAN=4><HR/></TH></TR>
+	<TR><TH ALIGN=LEFT COLSPAN=3>Regulators</TH><TH ALIGN=LEFT>Tap Settings</TH></TR>
+
+	<TR>
+		<TD>150-15001 ABC</TD><TD><DIV ID="reg150to15001_voltage"></DIV></TD>
+		<TD><DIV ID="reg150to15001"></DIV></TD>
+		<TD><DIV ID="reg150to15001_tap"></DIV></TD>
+	</TR>
+
+	<TR>
+		<TD>9-901 A</TD><TD><DIV ID="reg9to901_voltage"></DIV></TD>
+		<TD><DIV ID="reg9to901"></DIV></TD>
+		<TD><DIV ID="reg9to901_tap"></DIV></TD>
+	</TR>
+
+	<TR>
+		<TD>25-2501 AC</TD><TD><DIV ID="reg25to2501_voltage"></DIV></TD>
+		<TD><DIV ID="reg25to2501"></DIV></TD>
+		<TD><DIV ID="reg25to2501_tap"></DIV></TD>
+	</TR>
+
+	<TR>
+		<TD>160-16001 ABC</TD><TD><DIV ID="reg160to16001_voltage"></DIV></TD>
+		<TD><DIV ID="reg160to16001"></DIV></TD>
+		<TD><DIV ID="reg160to16001_tap"></DIV></TD>
+	</TR>
+
+	<TR><TH COLSPAN=4><HR/></TH></TR>
 	<TR><TH ALIGN=LEFT COLSPAN=3>Capacitors</TH><TH ALIGN=LEFT>Voltage</TH></TR>
+
 	<TR><TD>83 A</TD><TD><DIV ID="cap_83A"></DIV></TD><TD>
 		<INPUT TYPE="submit" VALUE="OPEN" ONCLICK="GLDSetProperty('cap_83','switchA','OPEN'); update();" />
 		<INPUT TYPE="submit" VALUE="CLOSE" ONCLICK="GLDSetProperty('cap_83','switchA','CLOSED'); update();" />
@@ -181,32 +209,48 @@
 		    document.getElementById("status").innerHTML = "No response";			    
 	    document.getElementById("clock").innerHTML = GLDGetGlobal("clock");
 	    document.getElementById("sw13to152").innerHTML = GLDGetProperty("sw13to152","status");
-	    document.getElementById("sw13to152_current").innerHTML = GLDGetProperty("sw13to152","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw13to152","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw13to152","current_out_C[A,0fM]");
+	    document.getElementById("sw13to152_current").innerHTML = triplet(75,GLDGetProperty("sw13to152","current_out_A[A,0fM]"),GLDGetProperty("sw13to152","current_out_B[A,0fM]"),GLDGetProperty("sw13to152","current_out_C[A,0fM]"));
 	    document.getElementById("sw18to135").innerHTML = GLDGetProperty("sw18to135","status");
-	    document.getElementById("sw18to135_current").innerHTML = GLDGetProperty("sw18to135","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw18to135","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw18to135","current_out_C[A,0fM]");
+	    document.getElementById("sw18to135_current").innerHTML = triplet(75,GLDGetProperty("sw18to135","current_out_A[A,0fM]"),GLDGetProperty("sw18to135","current_out_B[A,0fM]"),GLDGetProperty("sw18to135","current_out_C[A,0fM]"));
 	    document.getElementById("sw54to94").innerHTML = GLDGetProperty("sw54to94","status");
-	    document.getElementById("sw54to94_current").innerHTML = GLDGetProperty("sw54to94","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw54to94","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw54to94","current_out_C[A,0fM]");
+	    document.getElementById("sw54to94_current").innerHTML = triplet(75,GLDGetProperty("sw54to94","current_out_A[A,0fM]"),GLDGetProperty("sw54to94","current_out_B[A,0fM]"),GLDGetProperty("sw54to94","current_out_C[A,0fM]"));
 	    document.getElementById("sw60to160").innerHTML = GLDGetProperty("sw60to160","status");
-	    document.getElementById("sw60to160_current").innerHTML = GLDGetProperty("sw60to160","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw60to160","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw60to160","current_out_C[A,0fM]");
+	    document.getElementById("sw60to160_current").innerHTML = triplet(75,GLDGetProperty("sw60to160","current_out_A[A,0fM]"),GLDGetProperty("sw60to160","current_out_B[A,0fM]"),GLDGetProperty("sw60to160","current_out_C[A,0fM]"));
 	    document.getElementById("sw61to6101").innerHTML = GLDGetProperty("sw61to6101","status");
-	    document.getElementById("sw61to6101_current").innerHTML = GLDGetProperty("sw61to6101","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw61to6101","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw61to6101","current_out_C[A,0fM]");
+	    document.getElementById("sw61to6101_current").innerHTML = triplet(75,GLDGetProperty("sw61to6101","current_out_A[A,0fM]"),GLDGetProperty("sw61to6101","current_out_B[A,0fM]"),GLDGetProperty("sw61to6101","current_out_C[A,0fM]"));
 	    document.getElementById("sw97to197").innerHTML = GLDGetProperty("sw97to197","status");
-	    document.getElementById("sw97to197_current").innerHTML = GLDGetProperty("sw97to197","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw97to197","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw97to197","current_out_C[A,0fM]");
+	    document.getElementById("sw97to197_current").innerHTML = triplet(75,GLDGetProperty("sw97to197","current_out_A[A,0fM]"),GLDGetProperty("sw97to197","current_out_B[A,0fM]"),GLDGetProperty("sw97to197","current_out_C[A,0fM]"));
 	    document.getElementById("sw151to300").innerHTML = GLDGetProperty("sw151to300","status");
-	    document.getElementById("sw151to300_current").innerHTML = GLDGetProperty("sw151to300","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw151to300","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw151to300","current_out_C[A,0fM]");
+	    document.getElementById("sw151to300_current").innerHTML = triplet(75,GLDGetProperty("sw151to300","current_out_A[A,0fM]"),GLDGetProperty("sw151to300","current_out_B[A,0fM]"),GLDGetProperty("sw151to300","current_out_C[A,0fM]"));
 	    document.getElementById("sw15001to149").innerHTML = GLDGetProperty("sw15001to149","status");
-	    document.getElementById("sw15001to149_current").innerHTML = GLDGetProperty("sw15001to149","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw15001to149","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw15001to149","current_out_C[A,0fM]");
+	    document.getElementById("sw15001to149_current").innerHTML = triplet(75,GLDGetProperty("sw15001to149","current_out_A[A,0fM]"),GLDGetProperty("sw15001to149","current_out_B[A,0fM]"),GLDGetProperty("sw15001to149","current_out_C[A,0fM]"));
 	    document.getElementById("sw250to251").innerHTML = GLDGetProperty("sw250to251","status");
-	    document.getElementById("sw250to251_current").innerHTML = GLDGetProperty("sw250to251","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw250to251","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw250to251","current_out_C[A,0fM]");
+	    document.getElementById("sw250to251_current").innerHTML = triplet(75,GLDGetProperty("sw250to251","current_out_A[A,0fM]"),GLDGetProperty("sw250to251","current_out_B[A,0fM]"),GLDGetProperty("sw250to251","current_out_C[A,0fM]"));
 	    document.getElementById("sw300to350").innerHTML = GLDGetProperty("sw300to350","status");
-	    document.getElementById("sw300to350_current").innerHTML = GLDGetProperty("sw300to350","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw300to350","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw300to350","current_out_C[A,0fM]");
+	    document.getElementById("sw300to350_current").innerHTML = triplet(75,GLDGetProperty("sw300to350","current_out_A[A,0fM]"),GLDGetProperty("sw300to350","current_out_B[A,0fM]"),GLDGetProperty("sw300to350","current_out_C[A,0fM]"));
 	    document.getElementById("sw450to451").innerHTML = GLDGetProperty("sw450to451","status");
-	    document.getElementById("sw450to451_current").innerHTML = GLDGetProperty("sw450to451","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw450to451","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw450to451","current_out_C[A,0fM]");
+	    document.getElementById("sw450to451_current").innerHTML = triplet(75,GLDGetProperty("sw450to451","current_out_A[A,0fM]"),GLDGetProperty("sw450to451","current_out_B[A,0fM]"),GLDGetProperty("sw450to451","current_out_C[A,0fM]"));
 	    document.getElementById("sw95to195").innerHTML = GLDGetProperty("sw95to195","status");
-	    document.getElementById("sw95to195_current").innerHTML = GLDGetProperty("sw95to195","current_out_A[A,0fM]") + ' / ' + GLDGetProperty("sw95to195","current_out_B[A,0fM]") + ' / ' + GLDGetProperty("sw95to195","current_out_C[A,0fM]");
+	    document.getElementById("sw95to195_current").innerHTML = triplet(75,GLDGetProperty("sw95to195","current_out_A[A,0fM]"),GLDGetProperty("sw95to195","current_out_B[A,0fM]"),GLDGetProperty("sw95to195","current_out_C[A,0fM]"));
 
 	    document.getElementById("manual_1_status").innerHTML = GLDGetProperty("scheme_1","status");
 	    document.getElementById("manual_1_armed").innerHTML = GLDGetProperty("scheme_1","armed");
+
+	    document.getElementById("reg150to15001").innerHTML = GLDGetProperty("rc501","Control");
+	    document.getElementById("reg150to15001_voltage").innerHTML = triplet(75,GLDGetProperty("node_15001","voltage_A[kV,2fM]"), GLDGetProperty("node_15001","voltage_B[kV,2fM]"), GLDGetProperty("node_15001","voltage_C[kV,2fM]"));
+	    document.getElementById("reg150to15001_tap").innerHTML = triplet(25,GLDGetProperty("reg150to15001","tap_A"), GLDGetProperty("reg150to15001","tap_B"), GLDGetProperty("reg150to15001","tap_C"));
+
+	    document.getElementById("reg9to901").innerHTML = GLDGetProperty("rc502","Control");
+	    document.getElementById("reg9to901_voltage").innerHTML = triplet(75,GLDGetProperty("node_901","voltage_A[kV,2fM]"),"&mdash;","&mdash;");
+	    document.getElementById("reg9to901_tap").innerHTML = triplet(25,GLDGetProperty("reg9to901","tap_A"),"&mdash;","&mdash;");
+
+	    document.getElementById("reg25to2501").innerHTML = GLDGetProperty("rc503","Control");
+	    document.getElementById("reg25to2501_voltage").innerHTML = triplet(75,GLDGetProperty("node_2501","voltage_A[kV,2fM]"),"&mdash;", GLDGetProperty("node_2501","voltage_C[kV,2fM]"));
+	    document.getElementById("reg25to2501_tap").innerHTML = triplet(25,GLDGetProperty("reg25to2501","tap_A"),"&dash;",GLDGetProperty("reg25to2501","tap_C"));
+
+	    document.getElementById("reg160to16001").innerHTML = GLDGetProperty("rc504","Control");
+	    document.getElementById("reg160to16001_voltage").innerHTML = triplet(75,GLDGetProperty("node_16001","voltage_A[kV,2fM]"),GLDGetProperty("node_16001","voltage_B[kV,2fM]"),GLDGetProperty("node_16001","voltage_C[kV,2fM]"));
+	    document.getElementById("reg160to16001_tap").innerHTML = triplet(25,GLDGetProperty("reg160to16001","tap_A"),GLDGetProperty("reg160to16001","tap_B"),GLDGetProperty("reg160to16001","tap_C"));
 
 	    document.getElementById("cap_83A").innerHTML = GLDGetProperty("cap_83","switchA");
 	    document.getElementById("cap_83_voltageA").innerHTML = GLDGetProperty("cap_83","voltage_A[kV,2fM]");
@@ -222,6 +266,10 @@
 	    document.getElementById("cap_92_voltageC").innerHTML = GLDGetProperty("cap_92","voltage_C[kV,2fM]");
 	    document.getElementById("status").innerHTML = "Ok";
 	    count = 0;
+	}
+	function triplet(w,a,b,c)
+	{
+		return "<TABLE WIDTH=" + w*3 + "><TR><TD ALIGN=RIGHT WIDTH=" + w + ">" + a + "</TD><TD ALIGN=RIGHT WIDTH=" + w + ">" + b + "</TD><TD ALIGN=RIGHT WIDTH=" + w + ">" + c + "</TD></TR></TABLE>";
 	}
 	function arm(scheme,sw)
 	{

@@ -75,6 +75,8 @@ Select states for which climate data is desired:
 </TABLE>
 <INPUT TYPE="submit" NAME="action" VALUE="Process" />
 <BUTTON ONCLICK="window.close();">Done</BUTTON>
+<BR/>After you make changes, click [Process] to download weather data and update the weather data folder.  
+Click [Done] when you have finished processing new data.
 </FORM>
 <PRE>
 <?php

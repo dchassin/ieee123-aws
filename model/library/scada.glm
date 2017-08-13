@@ -154,14 +154,6 @@ object recorder {
         interval 4;
         header_fieldnames "name";
 }
-object recorder {
-        connection scada;
-        table regulator;
-        parent reg9to901;
-        property "power_in,power_out,tap_A,tap_B,tap_C";
-        interval 4;
-        header_fieldnames "name";
-}
 
 //
 // Capacitors

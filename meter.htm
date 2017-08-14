@@ -30,10 +30,23 @@
 	
 	<TR><TH ALIGN=LEFT>Customer</TH><TH ALIGN=LEFT>Status</TH><TH ALIGN=LEFT>Control</TH><TH ALIGN=LEFT>Demand</TH><TH ALIGN=LEFT>Energy</TH><TH ALIGN=LEFT>Voltage 1</TH><TH ALIGN=LEFT>Voltage 2</TH></TR>
 	<TR><TH ALIGN=LEFT COLSPAN=7><HR/></TH></TR>
-	<TR><TD><INPUT TYPE="submit" VALUE="Previous" ONCLICK="previous();" /></TD></TR>
+	<TR><TD COLSPAN=7><INPUT TYPE="submit" VALUE="Previous" ONCLICK="previous();" /> <INPUT TYPE="submit" VALUE="Next" ONCLICK="next();" />
 <SCRIPT TYPE="text/javascript">
+	max_item = 344;
 	first_row = 1;
 	nrows = 20;
+	for ( block = 0 ; block<344 ; block = block + nrows ) 
+	{
+		last = block+nrows;
+		if ( last > max_item )
+		{
+			last = max_item;
+		}
+		document.writeln('<INPUT TYPE="submit" VALUE="'+(block+1)+'-'+last+'" ONCLICK="goto(' + block + ');" />');
+	}
+</SCRIPT>
+	</TD></TR>
+<SCRIPT TYPE="text/javascript">
 	for ( id = first_row ; id < first_row+nrows ; id++ ) 
 	{
 		row = id - first_row;
@@ -48,7 +61,6 @@
 			+ '</TR>');
 	}
 </SCRIPT>
-	<TR><TD><INPUT TYPE="submit" VALUE="Next" ONCLICK="next();" /></TD></TR>
 </TABLE>
 <HR/>
 <TABLE WIDTH="100%">
@@ -72,42 +84,61 @@
 		if ( first_row > nhouses-nrows+1 ) first_row = nhouses-nrows+1;
 		refresh(true);
 	}
+	function goto(n)
+	{
+		first_row = n;
+		refresh(true);
+	}
 	function refresh(onetime)
 	{
 		count = count + 1;
-	    if ( !onetime ) setTimeout("refresh(false)",300000);
-	    if ( count == 1 )
-		    document.getElementById("status").innerHTML = "Updating";
+		if ( !onetime ) setTimeout("refresh(false)",300000);
+		if ( count == 1 )
+			document.getElementById("status").innerHTML = "Updating";
 		else
-		    document.getElementById("status").innerHTML = "Update failed";			    
-	    document.getElementById("clock").innerHTML = GLDGetGlobal("clock");
+			document.getElementById("status").innerHTML = "Update failed";				
+		document.getElementById("clock").innerHTML = GLDGetGlobal("clock");
 		for ( id = first_row ; id < first_row+nrows ; id++ ) 
-	    {
+		{
 			row = id - first_row;
-			document.getElementById("meter_"+row).innerHTML = id;
-			document.getElementById("meter_"+row+"_status").innerHTML = GLDGetProperty("meter_"+id,"service_status");
-	    	document.getElementById("meter_"+row+"_power").innerHTML = GLDGetProperty("meter_"+id,"measured_real_power[kW,1f]");
-	    	document.getElementById("meter_"+row+"_energy").innerHTML = GLDGetProperty("meter_"+id,"measured_real_energy[kWh,1f]");
-	    	document.getElementById("meter_"+row+"_voltage_1").innerHTML = GLDGetProperty("meter_"+id,"voltage_1[V,1fM]");
-	    	document.getElementById("meter_"+row+"_voltage_2").innerHTML = GLDGetProperty("meter_"+id,"voltage_2[V,1fM]");
-	    	if ( document.getElementById("meter_"+row+"_status").innerHTML == 'IN_SERVICE')
-	    	{
-	    		document.getElementById("meter_"+row+"_disconnect").disabled == false;
-	    		document.getElementById("meter_"+row+"_connect").disabled == true;
-	    	}
-	    	else if ( document.getElementById("meter_"+row+"_status").innerHTML == 'OUT_OF_SERVICE')
-	    	{
-	    		document.getElementById("meter_"+row+"_disconnect").disabled == true;
-	    		document.getElementById("meter_"+row+"_connect").disabled == false;
-	    	}
-	    	else
-	    	{
-	    		document.getElementById("meter_"+row+"_disconnect").disabled == true;
-	    		document.getElementById("meter_"+row+"_connect").disabled == true;
-	    	}
-	    }
-	    document.getElementById("status").innerHTML = "Ok";
-	    count = 0;
+			if ( id > max_item )
+			{
+				document.getElementById("meter_"+row).innerHTML = '';
+				document.getElementById("meter_"+row+"_status").innerHTML = '';
+				document.getElementById("meter_"+row+"_power").innerHTML = '';
+				document.getElementById("meter_"+row+"_energy").innerHTML = '';
+				document.getElementById("meter_"+row+"_voltage_1").innerHTML = '';
+				document.getElementById("meter_"+row+"_voltage_2").innerHTML = '';
+				document.getElementById("meter_"+row+"_disconnect").disabled = true;
+				document.getElementById("meter_"+row+"_connect").disabled = true;
+			}
+			else
+			{
+				document.getElementById("meter_"+row).innerHTML = id;
+				document.getElementById("meter_"+row+"_status").innerHTML = GLDGetProperty("meter_"+id,"service_status");
+				document.getElementById("meter_"+row+"_power").innerHTML = GLDGetProperty("meter_"+id,"measured_real_power[kW,1f]");
+				document.getElementById("meter_"+row+"_energy").innerHTML = GLDGetProperty("meter_"+id,"measured_real_energy[kWh,1f]");
+				document.getElementById("meter_"+row+"_voltage_1").innerHTML = GLDGetProperty("meter_"+id,"voltage_1[V,1fM]");
+				document.getElementById("meter_"+row+"_voltage_2").innerHTML = GLDGetProperty("meter_"+id,"voltage_2[V,1fM]");
+				if ( document.getElementById("meter_"+row+"_status").innerHTML == 'IN_SERVICE')
+				{
+					document.getElementById("meter_"+row+"_disconnect").disabled == false;
+					document.getElementById("meter_"+row+"_connect").disabled == true;
+				}
+				else if ( document.getElementById("meter_"+row+"_status").innerHTML == 'OUT_OF_SERVICE')
+				{
+					document.getElementById("meter_"+row+"_disconnect").disabled == true;
+					document.getElementById("meter_"+row+"_connect").disabled == false;
+				}
+				else
+				{
+					document.getElementById("meter_"+row+"_disconnect").disabled == true;
+					document.getElementById("meter_"+row+"_connect").disabled == true;
+				}
+			}
+		}
+		document.getElementById("status").innerHTML = "Ok";
+		count = 0;
 	}
 </SCRIPT>
 

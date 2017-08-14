@@ -39,6 +39,7 @@
 			"my_scada" => "MYSQL_SCADA", 
 			"my_ami" => "MYSQL_AMI", 
 			"my_model" => "MYSQL_MODEL",
+			"my_graph" => "MYSQL_GRAPH",
 			);
 		// update config.php
 		$fh = fopen("config/local.php","w");
@@ -345,6 +346,7 @@
 <TR><TH>&nbsp;&nbsp;SCADA</TH><TD><INPUT TYPE="checkbox" NAME="my_scada" <?php if($my_scada)echo"CHECKED";?> /></TD><TD>Enable SCADA data collection.</TD></TR>
 <TR><TH>&nbsp;&nbsp;AMI</TH><TD><INPUT TYPE="checkbox" NAME="my_ami" <?php if($my_ami)echo"CHECKED";?> /></TD><TD>Enable AMI data collection.</TD></TR>
 <TR><TH>&nbsp;&nbsp;Model</TH><TD><INPUT TYPE="checkbox" NAME="my_model" <?php if($my_model)echo"CHECKED";?> /></TD><TD>Enable complete model dump.</TD></TR>
+<TR><TH>&nbsp;&nbsp;Graph</TH><TD><INPUT TYPE="checkbox" NAME="my_graph" <?php if($my_graph)echo"CHECKED";?> /></TD><TD>Enable complete graph dump.</TD></TR>
 <TR><TH>MySQL host</TH><TD><?php echo $my_server;?></TD><TD>Use this host name to read the data from the MySQL server</TD></TR>
 <TR><TH>MySQL user</TH><TD><?php echo $my_user;?></TD><TD>Use this user name to read the data from the MySQL server</TD></TR>
 <TR><TH>MySQL password</TH><TD><?php echo $my_pwd;?></TD><TD>Use this password to read the data from the MySQL server</TD></TR>

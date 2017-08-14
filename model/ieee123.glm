@@ -203,17 +203,21 @@ object database {
 ///////////////////////////////////////////////////////
 
 #ifdef MYSQL_ENABLE
+
 #ifdef MYSQL_MODEL
+
 #ifndef STOPTIME
 #print dumping model to '${MYSQL_MODEL}_model'
 export mysql ${MYSQL_NAME}_model;
-#endif // STOPTIME
-#else
+#endif // MYSQL_MODEL
+
 #ifdef MYSQL_GRAPH
 #print dumping graph to '${MYSQL_NAME}_graph'
 export mysql --graph ${MYSQL_NAME}_graph;
 #endif // MYSQL_GRAPH
-#endif // MYSQL_MODEL
+
+#endif // STOPTIME
+
 #endif // MYSQL_ENABLE
 
 ///////////////////////////////////////////////////////

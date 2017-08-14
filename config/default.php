@@ -40,4 +40,5 @@
 	$my_scada = 0;
 	$my_ami = 0;
 	$my_model = 0;
+	$my_graph = 0;
 ?>

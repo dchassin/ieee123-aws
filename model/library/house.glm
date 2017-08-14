@@ -99,7 +99,7 @@ object triplex_meter:..${COUNT} {
 #ifdef SOLAR
 	object inverter {
 		name `inverter_{SEQ_CUSTID}`;
-		phases AS;
+		phases ${PHASE}S;
 		rated_power 25000;	
 		generator_mode CONSTANT_PF;
 		generator_status ONLINE;
@@ -107,7 +107,7 @@ object triplex_meter:..${COUNT} {
 		inverter_type PWM;
 		object solar {
 			name `solar_{SEQ_CUSTID}`;
-			phases AS;
+			phases ${PHASE}S;
 #ifndef PVAREA
 			area 350 sf;
 #else

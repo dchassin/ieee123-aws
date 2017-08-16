@@ -163,6 +163,7 @@
 <TR><TH>Hostname</TH><TD>http://<INPUT TYPE="text" NAME="gridlabd_server" VALUE="<?php echo $gridlabd_server;?>" />/</TD><TD>The server hostname to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Port</TH><TD><INPUT TYPE="text" NAME="gridlabd_port" VALUE="<?php echo $gridlabd_port;?>" /></TD><TD>The server TCP port to use for GridLAB-D data queries.</TD></TR>
 <TR><TH>Version</TH><TD COLSPAN=2><?php system("$gridlabd_bin/gridlabd --version || echo '<FONT COLOR=RED>(gridlabd error)</FONT>'");?></TD></TR>
+<TR><TH></TH><TD COLSPAN=2>Remote: <A HREF="<?php system("git remote get-url $(git remote | head -1)");?>" TARGET="_blank"><?php system("git remote get-url $(git remote | head -1)");?></A></TD></TR>
 <TR><TH>Job list <INPUT TYPE="submit" NAME="action" VALUE="Refresh" ONCLICK="location.reload(true);" /></TH><TD COLSPAN=2><PRE>PROC PID   PROGRESS   STATE   CLOCK                   MODEL
 ---- ----- ---------- ------- ----------------------- ---------------------------------------------------
 <DIV ID="joblist"><?php system("$gridlabd_bin/gridlabd --plist || echo '<FONT COLOR=RED>Error</FONT>'");?></DIV></PRE></TD></TR>

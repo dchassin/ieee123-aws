@@ -21,41 +21,58 @@
  	 
 	$result = mysql_query($query)
 		or die("mysql_query('$query') failed: " . mysql_error());
+	$columns = 0;
 	if ($result) 
 	{
 		$count = 0;
-		while ($row = mysql_fetch_assoc($result)) 
+		while ($row = mysql_fetch_row($result)) 
 		{
-			$x = $row["x"];
-			$y = $row["y"];
-			if ( $diff != 0 )
+			$x = $row[0];
+			if ( $columns < count($row) )
 			{
-      				if ( $count > 0 )
-				{
-					if ( $pos == 0 || ($yy > $y) )
-						$data[$x] = $yy - $y;
-				}
-				$yy = $y;
+				$columns = count($row);
 			}
-			else
+			for ( $n = 1 ; $n < count($row) ; $n++ )
 			{
-				$data[$x] = $y;
+				$y = $row[$n];
+				if ( $diff != 0 )
+				{
+      					if ( $count > 0 )
+					{
+						if ( $pos == 0 || ($yy > $y) )
+							$data[$n][$x] = $yy - $y;
+					}
+					$yy = $y;
+				}
+				else
+				{
+					$data[$n][$x] = $y;
+				}
 			}
 			$count++;
 		}
 	}
-	if ( $rev != 0 )
-	{
-		$data = array_reverse($data,true);
-	}
- 	 
 	$graph=new PHPGraphLib($xsize,$ysize); 
 	$graph->setLine($bar==0);
 	$graph->setBars($bar==1);
-	$graph->addData($data);
-	$graph->setGradient("lime", "green");
-	$graph->setBarOutlineColor("black");
-	$graph->setBackgroundColor("white");
+	for ( $n = 1 ; $n < $columns ; $n++ )
+	{
+		if ( $rev != 0 )
+		{
+			$data[$n] = array_reverse($data[$n],true);
+		}	 
+		$graph->addData($data[$n]);
+	}
+	if ( $bar==1 )
+	{
+		$graph->setGradient("lime", "green");
+		$graph->setBarOutlineColor("black");
+		$graph->setBackgroundColor("white");
+	}
+	else 
+	{
+		$graph->setLineColor("blue");
+	}
 	if ( strlen($title) > 0 )
 		$graph->setTitle($title);
 	$graph->setXValuesInterval(intval(preg_replace('[^0-9]','',$xinterval)));

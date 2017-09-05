@@ -42,7 +42,7 @@
 		{
 			last = max_item;
 		}
-		document.writeln('<INPUT TYPE="submit" VALUE="'+(block+1)+'-'+last+'" ONCLICK="goto(' + block + ');" />');
+		document.writeln('<INPUT TYPE="submit" VALUE="'+(block+1)+'-'+last+'" ONCLICK="goto(' + (block+1) + ');" />');
 	}
 </SCRIPT>
 	</TD></TR>
@@ -52,8 +52,8 @@
 		row = id - first_row;
 		document.writeln('<TR><TD><DIV ID="meter_'+row+'"></DIV></TD>'
 			+ '<TD><DIV ID="meter_'+row+'_status"></DIV></TD>'
-			+ '<TD><INPUT ID="meter_'+row+'_disconnect" TYPE="submit" VALUE="DISCONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'OUT_OF_SERVICE\');" />'
-			+ '<INPUT ID="meter_'+row+'_connect" TYPE="submit" VALUE="CONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'IN_SERVICE\');" /></TD>'
+			+ '<TD><INPUT ID="meter_'+row+'_disconnect" TYPE="submit" VALUE="DISCONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'OUT_OF_SERVICE\'); refresh(1);" />'
+			+ '<INPUT ID="meter_'+row+'_connect" TYPE="submit" VALUE="CONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'IN_SERVICE\'); refresh(1);" /></TD>'
 			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Demand (W)&query=SELECT t as x, measured_real_power as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_power"></DIV></A></TD>'
 			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?diff=1&pos=1&rev=1&bar=1&xinterval=4&title=Meter '+id+'i Interval Energy (kWh/h)&query=SELECT t as x, measured_real_energy*4 as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_energy"></DIV></A></TD>'
 			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Line 1 Voltage (V)&ymin=110&ymax=130&query=SELECT t as x, cast(measured_voltage_1 as decimal(8,1)) as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_voltage_1"></DIV></A></TD>'
@@ -120,20 +120,15 @@
 				document.getElementById("meter_"+row+"_energy").innerHTML = GLDGetProperty("meter_"+id,"measured_real_energy[kWh,1f]");
 				document.getElementById("meter_"+row+"_voltage_1").innerHTML = GLDGetProperty("meter_"+id,"voltage_1[V,1fM]");
 				document.getElementById("meter_"+row+"_voltage_2").innerHTML = GLDGetProperty("meter_"+id,"voltage_2[V,1fM]");
+				document.getElementById("meter_"+row+"_disconnect").disabled == false;
+				document.getElementById("meter_"+row+"_connect").disabled == false;
 				if ( document.getElementById("meter_"+row+"_status").innerHTML == 'IN_SERVICE')
 				{
-					document.getElementById("meter_"+row+"_disconnect").disabled == false;
 					document.getElementById("meter_"+row+"_connect").disabled == true;
 				}
 				else if ( document.getElementById("meter_"+row+"_status").innerHTML == 'OUT_OF_SERVICE')
 				{
 					document.getElementById("meter_"+row+"_disconnect").disabled == true;
-					document.getElementById("meter_"+row+"_connect").disabled == false;
-				}
-				else
-				{
-					document.getElementById("meter_"+row+"_disconnect").disabled == true;
-					document.getElementById("meter_"+row+"_connect").disabled == true;
 				}
 			}
 		}

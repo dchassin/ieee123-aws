@@ -15,7 +15,7 @@
 <SCRIPT src="gridlabd.js"> </SCRIPT>
 
 <H1>
-[<A HREF="http://<<<HOSTNAME>>>/">Home</A>]
+[<A HREF="http://<<<HOSTNAME>>>/<<<DOCROOT>>>/">Home</A>]
 [<A HREF="http://<<<HOSTNAME>>>:<<<PORT>>>/rt/control.htm">Control</A>]
 [<A HREF="http://<<<HOSTNAME>>>:<<<PORT>>>/rt/weather.htm">Weather</A>]
 [<A HREF="http://<<<HOSTNAME>>>:<<<PORT>>>/rt/feeder.htm">Feeder</A>]
@@ -54,10 +54,10 @@
 			+ '<TD><DIV ID="meter_'+row+'_status"></DIV></TD>'
 			+ '<TD><INPUT ID="meter_'+row+'_disconnect" TYPE="submit" VALUE="DISCONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'OUT_OF_SERVICE\'); refresh(1);" />'
 			+ '<INPUT ID="meter_'+row+'_connect" TYPE="submit" VALUE="CONNECT" ONCLICK="GLDSetProperty(\'meter_'+id+'\',\'service_status\',\'IN_SERVICE\'); refresh(1);" /></TD>'
-			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Demand (W)&query=SELECT t as x, measured_real_power as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_power"></DIV></A></TD>'
-			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?diff=1&pos=1&rev=1&bar=1&xinterval=4&title=Meter '+id+'i Interval Energy (kWh/h)&query=SELECT t as x, measured_real_energy*4 as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_energy"></DIV></A></TD>'
-			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Line 1 Voltage (V)&ymin=110&ymax=130&query=SELECT t as x, cast(measured_voltage_1 as decimal(8,1)) as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_voltage_1"></DIV></A></TD>'
-			+ '<TD><A HREF="http://<<<hostname>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Line 2 Voltage (V)&ymin=110&ymax=130&query=SELECT t as x, cast(measured_voltage_2 as decimal(8,1)) as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_voltage_2"></DIV></A></TD>'
+			+ '<TD><A HREF="http://<<<hostname>>>/<<<DOCROOT>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Demand (W)&query=SELECT t as x, measured_real_power as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_power"></DIV></A></TD>'
+			+ '<TD><A HREF="http://<<<hostname>>>/<<<DOCROOT>>>/graphtool.php?diff=1&pos=1&rev=1&bar=1&xinterval=4&title=Meter '+id+'i Interval Energy (kWh/h)&query=SELECT t as x, measured_real_energy*4 as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_energy"></DIV></A></TD>'
+			+ '<TD><A HREF="http://<<<hostname>>>/<<<DOCROOT>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Line 1 Voltage (V)&ymin=110&ymax=130&query=SELECT t as x, cast(measured_voltage_1 as decimal(8,1)) as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_voltage_1"></DIV></A></TD>'
+			+ '<TD><A HREF="http://<<<hostname>>>/<<<DOCROOT>>>/graphtool.php?xinterval=4&rev=1&title=Meter '+id+' Line 2 Voltage (V)&ymin=110&ymax=130&query=SELECT t as x, cast(measured_voltage_2 as decimal(8,1)) as y FROM <<<MYSQL_NAME>>>_ami.meter WHERE name=%27meter_'+id+'%27 ORDER BY id DESC LIMIT 96" TARGET="_blank"><DIV ID="meter_'+row+'_voltage_2"></DIV></A></TD>'
 			+ '</TR>');
 	}
 </SCRIPT>

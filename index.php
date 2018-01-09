@@ -18,6 +18,7 @@
 	{	// white-list of allowed parameters and mapping to GridLAB-D model settings
 		$map = array( // this list should match the list of settings needed by the model
 			"gridlabd_server" => "HOSTNAME",
+			"gridlabd_docroot" => "DOCROOT",
 			"gridlabd_port" => "PORT", 
 			"glm_modelname" => "NAME",
 			"glm_weather" => "WEATHER", 
@@ -155,6 +156,7 @@
 [<A HREF="<?php echo "http://$gridlabd_server:$gridlabd_port/kml/output/gridlabd.kml";?>">Map</A>]
 </H1>
 <FORM METHOD="POST">
+<INPUT TYPE="hidden" NAME="gridlabd_docroot" VALUE="<?php echo str_replace('/index.php','',$_SERVER['REQUEST_URI']);?>"/>
 <INPUT TYPE="hidden" NAME="gridlabd_server" VALUE="<?php echo $gridlabd_server;?>"/>
 <INPUT TYPE="hidden" NAME="glm_modelname" VALUE="<?php echo $glm_modelname;?>"/>
 <TABLE CELLSPACING=5>
